@@ -19,6 +19,7 @@ class GameViewController: NSViewController {
         // Present the scene
         let skView = self.view as! SKView
         skView.presentScene(scene)
+		skView.setFrameSize(NSSize(width: 360, height: 640))
         
         skView.ignoresSiblingOrder = true
         
