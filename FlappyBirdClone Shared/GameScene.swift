@@ -11,6 +11,7 @@ class GameScene: SKScene {
     
 	private var baseController: BaseController!
 	private var pipeController: PipeController!
+	private var playerController: PlayerController!
 	
     class func newGameScene() -> GameScene {
         // Load 'GameScene.sks' as an SKScene.
@@ -32,6 +33,7 @@ class GameScene: SKScene {
         
 		baseController.update()
 		pipeController.update()
+		playerController.update()
 		
     }
 	
@@ -39,6 +41,22 @@ class GameScene: SKScene {
 	private func setup() {
 		baseController = childNode(withName: "base") as? BaseController
 		pipeController = childNode(withName: "Pipes") as? PipeController
+		playerController = childNode(withName: "player") as? PlayerController
 	}
 	
 }
+
+// MARK: - Control
+extension GameScene {
+	
+	#if os(macOS) 
+	override func keyDown(with event: NSEvent) {
+		playerController.keyDown(with: event)
+	}
+	#elseif os(iOS)
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		playerController.touchesBegan(touches, with: event)
+	}
+	#endif
+}
+

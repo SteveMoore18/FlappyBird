@@ -24,6 +24,8 @@
 		E27F4E9826E8EC17000D8AA7 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9626E8EC17000D8AA7 /* BaseController.swift */; };
 		E27F4E9A26E904F2000D8AA7 /* PipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9926E904F2000D8AA7 /* PipeController.swift */; };
 		E27F4E9B26E904F2000D8AA7 /* PipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9926E904F2000D8AA7 /* PipeController.swift */; };
+		E27F4E9D26E94F55000D8AA7 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */; };
+		E27F4E9E26E94F55000D8AA7 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,7 @@
 		E27F4E8526E8E0A9000D8AA7 /* FlappyBirdClone_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlappyBirdClone_macOS.entitlements; sourceTree = "<group>"; };
 		E27F4E9626E8EC17000D8AA7 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		E27F4E9926E904F2000D8AA7 /* PipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipeController.swift; sourceTree = "<group>"; };
+		E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,7 @@
 				E27F4E6226E8E09D000D8AA7 /* GameScene.sks */,
 				E27F4E9626E8EC17000D8AA7 /* BaseController.swift */,
 				E27F4E9926E904F2000D8AA7 /* PipeController.swift */,
+				E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */,
 				E27F4E6326E8E09D000D8AA7 /* GameScene.swift */,
 				E27F4E6426E8E0A9000D8AA7 /* Assets.xcassets */,
 			);
@@ -223,6 +227,7 @@
 			files = (
 				E27F4E8A26E8E0A9000D8AA7 /* GameScene.swift in Sources */,
 				E27F4E6F26E8E0A9000D8AA7 /* GameViewController.swift in Sources */,
+				E27F4E9D26E94F55000D8AA7 /* PlayerController.swift in Sources */,
 				E27F4E9726E8EC17000D8AA7 /* BaseController.swift in Sources */,
 				E27F4E6D26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */,
 				E27F4E9A26E904F2000D8AA7 /* PipeController.swift in Sources */,
@@ -235,6 +240,7 @@
 			files = (
 				E27F4E8B26E8E0A9000D8AA7 /* GameScene.swift in Sources */,
 				E27F4E8026E8E0A9000D8AA7 /* GameViewController.swift in Sources */,
+				E27F4E9E26E94F55000D8AA7 /* PlayerController.swift in Sources */,
 				E27F4E9826E8EC17000D8AA7 /* BaseController.swift in Sources */,
 				E27F4E7E26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */,
 				E27F4E9B26E904F2000D8AA7 /* PipeController.swift in Sources */,
