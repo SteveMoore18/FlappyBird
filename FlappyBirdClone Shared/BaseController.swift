@@ -10,14 +10,17 @@ import SpriteKit
 class BaseController: SKNode {
 
 	private var bases: [SKSpriteNode]!
-	private let velocity: CGFloat = -200
+	private let velocity: CGFloat = -60
 	private var baseWidth: CGFloat!
+	private var moveAction: SKAction!
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		// Getting nodes from GameScene.sks -> base
 		bases = children as? [SKSpriteNode]
+		
+		moveAction = SKAction.repeatForever(SKAction.move(by: CGVector(dx: velocity, dy: 0), duration: 0.3))
 		
 		// Start moving
 		move()
@@ -40,11 +43,11 @@ class BaseController: SKNode {
 	
 	//MARK:- Private func
 	private func move() {
-		bases.forEach { $0.physicsBody?.velocity.dx = velocity }
+		bases.forEach { $0.run(moveAction, withKey: "move") }
 	}
 	
 	private func stop() {
-		bases.forEach { $0.physicsBody?.velocity.dx = 0 }
+		bases.forEach { $0.removeAction(forKey: "move") }
 	}
 	
 }
