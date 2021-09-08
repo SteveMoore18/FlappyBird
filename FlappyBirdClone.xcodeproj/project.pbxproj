@@ -20,6 +20,8 @@
 		E27F4E8B26E8E0A9000D8AA7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E6326E8E09D000D8AA7 /* GameScene.swift */; };
 		E27F4E8C26E8E0A9000D8AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E27F4E6426E8E0A9000D8AA7 /* Assets.xcassets */; };
 		E27F4E8D26E8E0A9000D8AA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E27F4E6426E8E0A9000D8AA7 /* Assets.xcassets */; };
+		E27F4E9726E8EC17000D8AA7 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9626E8EC17000D8AA7 /* BaseController.swift */; };
+		E27F4E9826E8EC17000D8AA7 /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9626E8EC17000D8AA7 /* BaseController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,7 @@
 		E27F4E8226E8E0A9000D8AA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E27F4E8426E8E0A9000D8AA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E27F4E8526E8E0A9000D8AA7 /* FlappyBirdClone_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FlappyBirdClone_macOS.entitlements; sourceTree = "<group>"; };
+		E27F4E9626E8EC17000D8AA7 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				E27F4E6226E8E09D000D8AA7 /* GameScene.sks */,
+				E27F4E9626E8EC17000D8AA7 /* BaseController.swift */,
 				E27F4E6326E8E09D000D8AA7 /* GameScene.swift */,
 				E27F4E6426E8E0A9000D8AA7 /* Assets.xcassets */,
 			);
@@ -215,6 +219,7 @@
 			files = (
 				E27F4E8A26E8E0A9000D8AA7 /* GameScene.swift in Sources */,
 				E27F4E6F26E8E0A9000D8AA7 /* GameViewController.swift in Sources */,
+				E27F4E9726E8EC17000D8AA7 /* BaseController.swift in Sources */,
 				E27F4E6D26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +230,7 @@
 			files = (
 				E27F4E8B26E8E0A9000D8AA7 /* GameScene.swift in Sources */,
 				E27F4E8026E8E0A9000D8AA7 /* GameViewController.swift in Sources */,
+				E27F4E9826E8EC17000D8AA7 /* BaseController.swift in Sources */,
 				E27F4E7E26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
