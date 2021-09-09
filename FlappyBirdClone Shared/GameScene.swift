@@ -15,6 +15,7 @@ class GameScene: SKScene {
 	
 	private var gameOverNode: SKSpriteNode!
 	private var playButtonNode: SKSpriteNode!
+	private var firstMessageNode: SKSpriteNode!
 	
 	private var isGameOver = false
 	private var isGameStart = false
@@ -53,6 +54,7 @@ class GameScene: SKScene {
 		
 		gameOverNode = childNode(withName: "gameOverLabel") as? SKSpriteNode
 		playButtonNode = childNode(withName: "UI")?.childNode(withName: "playButton") as? SKSpriteNode
+		firstMessageNode = childNode(withName: "UI")?.childNode(withName: "message") as? SKSpriteNode
 	}
 	
 	private func gameOver() {
@@ -77,6 +79,8 @@ class GameScene: SKScene {
 	private func start() {
 		isGameStart = true
 		pipeController.move()
+		firstMessageNode.position.x = -400
+		playButtonNode.position.x = -400
 	}
 	
 }
@@ -103,7 +107,6 @@ extension GameScene {
 		if isGameStart {
 			playerController.keyDown(with: event)
 		}
-		
 	}
 	
 	#elseif os(iOS)
