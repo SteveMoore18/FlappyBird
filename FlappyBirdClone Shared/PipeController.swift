@@ -16,6 +16,7 @@ class PipeController: SKNode {
 	private let pipeXDistance: CGFloat = 190
 	private var pipeXStartPosition: CGFloat!
 	private(set) var bitCategory: UInt32!
+	private var isMoving = false
 	
 	private var randomYPosition: CGFloat {
 		let yPos = Int.random(in: (-330)...(-120))
@@ -53,11 +54,16 @@ class PipeController: SKNode {
 	
 	public func stop() {
 		pipes.forEach { $0.removeAction(forKey: "move") }
+		isMoving = false
 	}
 	
 	public func move() {
-		pipes.forEach {
-			$0.run(moveAction, withKey: "move")
+		
+		if !isMoving {
+			pipes.forEach {
+				$0.run(moveAction, withKey: "move")
+			}
+			isMoving = true
 		}
 		
 	}

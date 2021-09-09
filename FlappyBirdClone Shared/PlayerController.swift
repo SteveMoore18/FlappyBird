@@ -115,6 +115,7 @@ extension PlayerController {
 	#elseif os(iOS)
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 		jump()
+		physicsBody?.affectedByGravity = true
 	}
 	#endif
 }

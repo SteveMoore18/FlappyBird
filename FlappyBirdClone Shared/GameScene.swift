@@ -59,6 +59,7 @@ class GameScene: SKScene {
 	
 	private func gameOver() {
 		isGameOver = true
+		isGameStart = false
 		baseController.stop()
 		pipeController.stop()
 		playerController.dead()
@@ -78,7 +79,7 @@ class GameScene: SKScene {
 	
 	private func start() {
 		isGameStart = true
-		pipeController.move()
+//		pipeController.move()
 		firstMessageNode.position.x = -400
 		playButtonNode.position.x = -400
 	}
@@ -91,27 +92,48 @@ extension GameScene {
 	#if os(macOS) 
 	override func keyDown(with event: NSEvent) {
 		
+		if isGameStart {
+			playerController.keyDown(with: event)
+			pipeController.move()
+		}
+		
 		switch event.keyCode {
 			case 0x31:
-				if !isGameStart {
-					start()
-				}
 				if isGameOver {
 					restart()
+				}
+				if !isGameStart {
+					start()
 				}
 				break
 			default:
 				break
 		}
 		
-		if isGameStart {
-			playerController.keyDown(with: event)
-		}
+		
 	}
 	
 	#elseif os(iOS)
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		playerController.touchesBegan(touches, with: event)
+		
+		guard let touch = touches.first else { return }
+		let location = touch.location(in: self)
+		let touchNode = atPoint(location)
+		
+		if isGameStart {
+			playerController.touchesBegan(touches, with: event)
+			pipeController.move()
+		}
+		
+		if touchNode == playButtonNode {
+			if isGameOver {
+				restart()
+			}
+			if !isGameStart {
+				start()
+			}
+		}
+		
 	}
 	#endif
 }
