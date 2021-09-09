@@ -62,10 +62,19 @@ class PlayerController: SKSpriteNode {
 		
 	}
 	
+	let rotateDown = SKAction.rotate(toAngle: CGFloat(GLKMathDegreesToRadians(-90)), duration: 0.4)
 	public func update() {
 		if !isGameOver {
 			position.x = defaultXPosition
 		}
+		
+		if (physicsBody?.velocity.dy)! < 0 {
+			
+			if action(forKey: "rotateDown") == nil {
+				run(rotateDown, withKey: "rotateDown")
+			}
+		}
+		
 	}
 	
 	public func dead() {
@@ -80,12 +89,16 @@ class PlayerController: SKSpriteNode {
 		position.y = defaultYPosition
 		physicsBody?.affectedByGravity = false
 		physicsBody?.velocity = .zero
+		zRotation = 0
+		removeAction(forKey: "rotateDown")
 	}
 	
 	// MARK: - Private functions
 	private func jump() {
 		physicsBody?.velocity.dy = 0
 		physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
+		removeAction(forKey: "rotateDown")
+		zRotation = CGFloat(GLKMathDegreesToRadians(45))
 	}
 	
 	private func changeAnimation() {
