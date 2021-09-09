@@ -73,11 +73,16 @@ class PlayerController: SKSpriteNode {
 			if action(forKey: "rotateDown") == nil {
 				run(rotateDown, withKey: "rotateDown")
 			}
+			
+			// When the player died, we make it so that you can pass through the pipes
+			physicsBody?.collisionBitMask = isGameOver ? 4 : 0xffffffff
+			
 		}
 		
 	}
 	
 	public func dead() {
+		physicsBody?.velocity.dy = 0
 		isGameOver = true
 		removeAction(forKey: "animation")
 	}

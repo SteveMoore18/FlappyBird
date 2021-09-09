@@ -150,7 +150,9 @@ extension GameScene: SKPhysicsContactDelegate {
 				gameOver()
 				break
 			case playerController.bitCategory | pipeController.bitCategory:
-				gameOver()
+				if !isGameOver {
+					gameOver()
+				}
 			default:
 				break
 		}
