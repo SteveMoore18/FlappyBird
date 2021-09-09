@@ -14,6 +14,8 @@ class PipeController: SKNode {
 	private var pipeWidth: CGFloat!
 	private var moveAction: SKAction!
 	private let pipeXDistance: CGFloat = 190
+	private var pipeXStartPosition: CGFloat!
+	private(set) var bitCategory: UInt32!
 	
 	private var randomYPosition: CGFloat {
 		let yPos = Int.random(in: (-330)...(-120))
@@ -30,8 +32,10 @@ class PipeController: SKNode {
 		
 		moveAction = SKAction.repeatForever(SKAction.move(by: CGVector(dx: velocity, dy: 0), duration: 0.3))
 		
-		move()
+//		move()
 		
+		bitCategory = pipes[0].physicsBody?.categoryBitMask
+		pipeXStartPosition = pipes[0].position.x
 	}
 	
 	public func update() {
@@ -47,17 +51,23 @@ class PipeController: SKNode {
 		
 	}
 	
-	// MARK:- Private functions
-	private func move() {
+	public func stop() {
+		pipes.forEach { $0.removeAction(forKey: "move") }
+	}
+	
+	public func move() {
 		pipes.forEach {
 			$0.run(moveAction, withKey: "move")
 		}
 		
 	}
 	
-	private func stop() {
-		pipes.forEach { $0.removeAction(forKey: "move") }
+	public func restart() {
+		
+		pipes[0].position.x = pipeXStartPosition
+		pipes[1].position.x = pipes[0].position.x + pipeXDistance + pipeWidth
+		pipes[2].position.x = pipes[1].position.x + pipeXDistance + pipeWidth
+		
 	}
-	
 	
 }

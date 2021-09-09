@@ -13,6 +13,7 @@ class BaseController: SKNode {
 	private let velocity: CGFloat = -60
 	private var baseWidth: CGFloat!
 	private var moveAction: SKAction!
+	private(set) var bitCategory: UInt32!
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -26,7 +27,7 @@ class BaseController: SKNode {
 		move()
 		
 		baseWidth = bases[0].size.width
-		
+		bitCategory = bases[0].physicsBody?.categoryBitMask
 	}
 	
 	public func update() {
@@ -41,12 +42,11 @@ class BaseController: SKNode {
 		
 	}
 	
-	//MARK:- Private func
-	private func move() {
+	public func move() {
 		bases.forEach { $0.run(moveAction, withKey: "move") }
 	}
 	
-	private func stop() {
+	public func stop() {
 		bases.forEach { $0.removeAction(forKey: "move") }
 	}
 	

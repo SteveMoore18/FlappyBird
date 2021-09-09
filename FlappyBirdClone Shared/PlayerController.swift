@@ -9,7 +9,9 @@ import SpriteKit
 
 class PlayerController: SKSpriteNode {
 	
-	private let defaultPosition: CGFloat = -80
+	private var defaultXPosition: CGFloat!
+	private var defaultYPosition: CGFloat!
+	
 	private let redBirdTextures: [SKTexture] = [
 		SKTexture(imageNamed: "redbird-downflap"),
 		SKTexture(imageNamed: "redbird-midflap"),
@@ -43,15 +45,41 @@ class PlayerController: SKSpriteNode {
 		return nil
 	}
 	
+	private(set) var bitCategory: UInt32!
+	private var isGameOver = false
+	
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		run(SKAction.repeatForever(SKAction.animate(with: randomBirdTextures!, timePerFrame: 0.15)), withKey: "animation")
 		
+		bitCategory = physicsBody?.categoryBitMask
+		physicsBody?.affectedByGravity = false
+		
+		defaultXPosition = position.x
+		defaultYPosition = position.y
+		
 	}
 	
 	public func update() {
-		position.x = defaultPosition
+		if !isGameOver {
+			position.x = defaultXPosition
+		}
+	}
+	
+	public func dead() {
+		isGameOver = true
+		removeAction(forKey: "animation")
+	}
+	
+	public func restart() {
+		isGameOver = false
+		changeAnimation()
+		position.x = defaultXPosition
+		position.y = defaultYPosition
+		physicsBody?.affectedByGravity = false
+		physicsBody?.velocity = .zero
 	}
 	
 	// MARK: - Private functions
@@ -76,6 +104,7 @@ extension PlayerController {
 			case 0x31: // Space
 				if !event.isARepeat {
 					jump()
+					physicsBody?.affectedByGravity = true
 				}
 				break
 			default:
