@@ -20,6 +20,8 @@ class GameScene: SKScene {
 	private var isGameOver = false
 	private var isGameStart = false
 	
+	private var rectForEffect: SKSpriteNode!
+	
     class func newGameScene() -> GameScene {
         // Load 'GameScene.sks' as an SKScene.
         guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
@@ -55,6 +57,13 @@ class GameScene: SKScene {
 		gameOverNode = childNode(withName: "gameOverLabel") as? SKSpriteNode
 		playButtonNode = childNode(withName: "UI")?.childNode(withName: "playButton") as? SKSpriteNode
 		firstMessageNode = childNode(withName: "UI")?.childNode(withName: "message") as? SKSpriteNode
+		
+		rectForEffect = SKSpriteNode(color: .black, size: scene!.size)
+		rectForEffect.position = .zero
+		rectForEffect.zPosition = 10
+		rectForEffect.alpha = 0
+		
+		addChild(rectForEffect)
 	}
 	
 	private func gameOver() {
@@ -65,23 +74,40 @@ class GameScene: SKScene {
 		playerController.dead()
 		gameOverNode.position.x = 0
 		playButtonNode.position.x = 0
+		runScreenEffect(color: .white, duration: 0.15, complete: nil)
 	}
 	
 	private func restart() {
-		isGameOver = false
-		isGameStart = false
-		gameOverNode.position.x = -400
-		playButtonNode.position.x = -400
-		pipeController.restart()
-		playerController.restart()
-		baseController.move()
+		
+		runScreenEffect(color: .black, duration: 0.15) {
+			self.isGameOver = false
+			self.isGameStart = true
+			self.gameOverNode.position.x = -400
+			self.playButtonNode.position.x = -400
+			self.pipeController.restart()
+			self.playerController.restart()
+			self.baseController.move()
+		}
+		
 	}
 	
 	private func start() {
 		isGameStart = true
-//		pipeController.move()
 		firstMessageNode.position.x = -400
 		playButtonNode.position.x = -400
+	}
+	
+	// effect for if the player died or the game restart 
+	private func runScreenEffect(color: NSColor, duration: TimeInterval, complete: (() -> ())?) {
+		let show = SKAction.fadeAlpha(to: 0.8, duration: duration)
+		let hide = SKAction.fadeAlpha(to: 0, duration: duration)
+		rectForEffect.color = color
+		rectForEffect.run(show) {
+			if complete != nil {
+				complete!()
+			}
+			self.rectForEffect.run(hide)
+		}
 	}
 	
 }
@@ -147,7 +173,9 @@ extension GameScene: SKPhysicsContactDelegate {
 		
 		switch bodyA | bodyB {
 			case playerController.bitCategory | baseController.bitCategory:
-				gameOver()
+				if !isGameOver {
+					gameOver()
+				}
 				break
 			case playerController.bitCategory | pipeController.bitCategory:
 				if !isGameOver {
