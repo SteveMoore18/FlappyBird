@@ -17,6 +17,9 @@ class GameScene: SKScene {
 	private var playButtonNode: SKSpriteNode!
 	private var firstMessageNode: SKSpriteNode!
 	
+	private var backgroundDay: SKSpriteNode!
+	private var backgroundNight: SKSpriteNode!
+	
 	private var isGameOver = false
 	private var isGameStart = false
 	
@@ -58,6 +61,9 @@ class GameScene: SKScene {
 		playButtonNode = childNode(withName: "UI")?.childNode(withName: "playButton") as? SKSpriteNode
 		firstMessageNode = childNode(withName: "UI")?.childNode(withName: "message") as? SKSpriteNode
 		
+		backgroundDay = childNode(withName: "backgroundDay") as? SKSpriteNode
+		backgroundNight = childNode(withName: "backgroundNight") as? SKSpriteNode
+		
 		rectForEffect = SKSpriteNode(color: .black, size: scene!.size)
 		rectForEffect.position = .zero
 		rectForEffect.zPosition = 10
@@ -87,6 +93,7 @@ class GameScene: SKScene {
 			self.pipeController.restart()
 			self.playerController.restart()
 			self.baseController.move()
+			self.changeBackground()
 		}
 		
 	}
@@ -108,6 +115,11 @@ class GameScene: SKScene {
 			}
 			self.rectForEffect.run(hide)
 		}
+	}
+	
+	private func changeBackground() {
+		let random = Int.random(in: -1...0)
+		backgroundNight.zPosition = CGFloat(random)
 	}
 	
 }
