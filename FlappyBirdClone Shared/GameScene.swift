@@ -18,7 +18,7 @@ typealias UXColor = UIColor
 #endif
 
 class GameScene: SKScene {
-    
+	
 	private var baseController: BaseController!
 	private var pipeController: PipeController!
 	private var playerController: PlayerController!
@@ -39,29 +39,33 @@ class GameScene: SKScene {
 	
 	private var rectForEffect: SKSpriteNode!
 	
-    class func newGameScene() -> GameScene {
-        // Load 'GameScene.sks' as an SKScene.
-        guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
-            print("Failed to load GameScene.sks")
-            abort()
-        }
-        
-        // Set the scale mode to scale to fit the window
-        scene.scaleMode = .aspectFill
-        
+	private var playSounds = true
+	
+	private var startSound: SKAction!
+	
+	class func newGameScene() -> GameScene {
+		// Load 'GameScene.sks' as an SKScene.
+		guard let scene = SKScene(fileNamed: "GameScene") as? GameScene else {
+			print("Failed to load GameScene.sks")
+			abort()
+		}
+		
+		// Set the scale mode to scale to fit the window
+		scene.scaleMode = .aspectFill
+		
 		scene.setup()
 		
-        return scene
-    }
-    
-    
-    override func update(_ currentTime: TimeInterval) {
-        
+		return scene
+	}
+	
+	
+	override func update(_ currentTime: TimeInterval) {
+		
 		baseController.update()
 		pipeController.update()
 		playerController.update()
 		
-    }
+	}
 	
 	// MARK: - Private functions
 	private func setup() {
@@ -91,6 +95,10 @@ class GameScene: SKScene {
 		rectForEffect.position = .zero
 		rectForEffect.zPosition = 10
 		rectForEffect.alpha = 0
+		
+		if playSounds {
+			startSound = SKAction.playSoundFileNamed("sfx_swooshing.wav", waitForCompletion: false)
+		}
 		
 		addChild(rectForEffect)
 	}
@@ -179,6 +187,9 @@ extension GameScene {
 				}
 				if !isGameStart {
 					start()
+					if playSounds {
+						run(startSound)
+					}
 				}
 				break
 			default:
@@ -206,6 +217,9 @@ extension GameScene {
 			}
 			if !isGameStart {
 				start()
+				if playSounds {
+					run(startSound)
+				}
 			}
 		}
 		
@@ -223,10 +237,12 @@ extension GameScene: SKPhysicsContactDelegate {
 			case PlayerController.categoryBitMask | BaseController.categoryBitMask:
 				if !isGameOver {
 					gameOver()
+					playerController.playSound(effect: .Die)
 				}
 			case PlayerController.categoryBitMask | pipeController.categoryBitMask:
 				if !isGameOver {
 					gameOver()
+					playerController.playSound(effect: .DieAndFall)
 				}
 			case PlayerController.categoryBitMask | pipeController.scoreIncrementHitBoxCategoryBitMask:
 				if !pipeController.isScoreIncrHitBoxHitted {

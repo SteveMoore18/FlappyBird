@@ -50,8 +50,23 @@ class PlayerController: SKSpriteNode {
 	
 	private(set) var score = 0
 	
+	private var playSounds = true
+	
+	private var jumpSound: SKAction!
+	private var fallSound: SKAction!
+	private var hitSound: SKAction!
+	private var pointSound: SKAction!
+	
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+		
+		if playSounds {
+			jumpSound = SKAction.playSoundFileNamed("sfx_wing.wav", waitForCompletion: false)
+			fallSound = SKAction.playSoundFileNamed("sfx_die.wav", waitForCompletion: false)
+			hitSound = SKAction.playSoundFileNamed("sfx_hit.wav", waitForCompletion: false)
+			pointSound = SKAction.playSoundFileNamed("sfx_point.wav", waitForCompletion: false)
+		}
 		
 		redBirdTextures.forEach { $0.filteringMode = .nearest }
 		blueBirdTextures.forEach { $0.filteringMode = .nearest }
@@ -83,6 +98,26 @@ class PlayerController: SKSpriteNode {
 		
 	}
 	
+	enum DieSountEffect {
+		case DieAndFall
+		case Die
+	}
+	public func playSound(effect: DieSountEffect) {
+		switch effect {
+			case .DieAndFall:
+				if playSounds {
+					run(hitSound) {
+						self.run(self.fallSound)
+					}
+				}
+				
+			case .Die:
+				if playSounds {
+					run(hitSound)
+				}
+		}
+	}
+	
 	public func dead() {
 		physicsBody?.velocity.dy = 0
 		isGameOver = true
@@ -103,6 +138,9 @@ class PlayerController: SKSpriteNode {
 	
 	public func incrementScore() -> Int {
 		score += 1
+		if playSounds {
+			run(pointSound)
+		}
 		return score
 	}
 	
@@ -112,6 +150,9 @@ class PlayerController: SKSpriteNode {
 		physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
 		removeAction(forKey: "rotateDown")
 		zRotation = CGFloat(GLKMathDegreesToRadians(45))
+		if playSounds {
+			run(jumpSound)
+		}
 	}
 	
 	private func changeAnimation() {
