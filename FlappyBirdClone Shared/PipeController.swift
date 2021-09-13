@@ -9,14 +9,18 @@ import SpriteKit
 
 class PipeController: SKNode {
 	
-	private var pipes: [SKSpriteNode]!
+	private var pipes: [SKSpriteNode] = []
 	private let velocity: CGFloat = -60
 	private var pipeWidth: CGFloat!
 	private var moveAction: SKAction!
 	private let pipeXDistance: CGFloat = 190
 	private var pipeXStartPosition: CGFloat!
-	private(set) var bitCategory: UInt32!
+	public let categoryBitMask: UInt32 = 0x1 << 3
 	private var isMoving = false
+	
+	public var scoreIncrementHitbox: SKSpriteNode! // hitbox for pipes if the player passed 
+	public var scoreIncrementHitBoxCategoryBitMask: UInt32 = 0x1 << 4
+	public var isScoreIncrHitBoxHitted = false
 	
 	private var randomYPosition: CGFloat {
 		let yPos = Int.random(in: (-330)...(-120))
@@ -26,17 +30,34 @@ class PipeController: SKNode {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
-		pipes = children as? [SKSpriteNode]
-		pipes.forEach { $0.position.y = randomYPosition }
+		for lowerPipe in children as! [SKSpriteNode] {
+			if lowerPipe.name!.contains("lowerPipe") {
+				pipes.append(lowerPipe)
+			}
+		}
+		
+		pipes.forEach {
+			$0.position.y = randomYPosition
+			// Lower pipes
+			$0.physicsBody?.categoryBitMask = categoryBitMask
+			$0.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
+			
+			// Higher pipes parent from lower pipes
+			($0.children.first as? SKSpriteNode)?.physicsBody?.categoryBitMask = categoryBitMask
+			($0.children.first as? SKSpriteNode)?.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
+		}
 		
 		pipeWidth = pipes[0].size.width
 		
 		moveAction = SKAction.repeatForever(SKAction.move(by: CGVector(dx: velocity, dy: 0), duration: 0.3))
 		
-//		move()
-		
-		bitCategory = pipes[0].physicsBody?.categoryBitMask
+		// Getting from GameScene.sks
 		pipeXStartPosition = pipes[0].position.x
+		
+		scoreIncrementHitbox = children.first { $0.name == "scoreIncrHitbox" } as? SKSpriteNode
+		
+		scoreIncrementHitbox.physicsBody?.categoryBitMask = scoreIncrementHitBoxCategoryBitMask
+		scoreIncrementHitbox.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
 	}
 	
 	public func update() {
@@ -48,6 +69,12 @@ class PipeController: SKNode {
 			let temp = pipes.remove(at: 0)
 			temp.position.y = randomYPosition
 			pipes.append(temp)
+			isScoreIncrHitBoxHitted = false
+		}
+		
+		if !isScoreIncrHitBoxHitted {
+			scoreIncrementHitbox.position.x = pipes[0].position.x + 30
+			scoreIncrementHitbox.position.y = pipes[0].position.y + 269 // move between the pipes
 		}
 		
 	}
@@ -74,6 +101,8 @@ class PipeController: SKNode {
 		pipes[1].position.x = pipes[0].position.x + pipeXDistance + pipeWidth
 		pipes[2].position.x = pipes[1].position.x + pipeXDistance + pipeWidth
 		
+		scoreIncrementHitbox.position.x = pipes[0].position.x + 30
+		scoreIncrementHitbox.position.y = pipes[0].position.y + 269 // move between the pipes
 	}
 	
 }

@@ -16,6 +16,10 @@ class GameScene: SKScene {
 	private var gameOverNode: SKSpriteNode!
 	private var playButtonNode: SKSpriteNode!
 	private var firstMessageNode: SKSpriteNode!
+	private var scoreLabelNode: SKLabelNode!
+	
+	private var scoreLabelGameYPosition: CGFloat!
+	private var scoreLabelGameOverYPosition: CGFloat = 120
 	
 	private var backgroundDay: SKSpriteNode!
 	private var backgroundNight: SKSpriteNode!
@@ -60,6 +64,9 @@ class GameScene: SKScene {
 		gameOverNode = childNode(withName: "gameOverLabel") as? SKSpriteNode
 		playButtonNode = childNode(withName: "UI")?.childNode(withName: "playButton") as? SKSpriteNode
 		firstMessageNode = childNode(withName: "UI")?.childNode(withName: "message") as? SKSpriteNode
+		scoreLabelNode = childNode(withName: "UI")?.childNode(withName: "scoreLabel") as? SKLabelNode
+		scoreLabelNode.alpha = 0
+		scoreLabelGameYPosition = scoreLabelNode.position.y
 		
 		backgroundDay = childNode(withName: "backgroundDay") as? SKSpriteNode
 		backgroundNight = childNode(withName: "backgroundNight") as? SKSpriteNode
@@ -78,9 +85,18 @@ class GameScene: SKScene {
 		baseController.stop()
 		pipeController.stop()
 		playerController.dead()
-		gameOverNode.position.x = 0
-		playButtonNode.position.x = 0
-		runScreenEffect(color: .white, duration: 0.15, complete: nil)
+		
+		runScreenEffect(color: .white, duration: 0.15) {
+			self.gameOverNode.position.x = 0
+			self.playButtonNode.position.x = 0
+			
+			let moveScoreLabel = SKAction.moveTo(y: self.scoreLabelGameOverYPosition, duration: 0.2)
+			moveScoreLabel.timingMode = .easeInEaseOut
+			self.scoreLabelNode.run(moveScoreLabel, withKey: "moveScoreLabel")
+			
+		}
+		
+		
 	}
 	
 	private func restart() {
@@ -94,6 +110,10 @@ class GameScene: SKScene {
 			self.playerController.restart()
 			self.baseController.move()
 			self.changeBackground()
+			self.scoreLabelNode.alpha = 1
+			self.scoreLabelNode.text = "\(0)"
+			self.scoreLabelNode.removeAction(forKey: "moveScoreLabel")
+			self.scoreLabelNode.position.y = self.scoreLabelGameYPosition
 		}
 		
 	}
@@ -102,6 +122,7 @@ class GameScene: SKScene {
 		isGameStart = true
 		firstMessageNode.position.x = -400
 		playButtonNode.position.x = -400
+		scoreLabelNode.alpha = 1
 	}
 	
 	// effect for if the player died or the game restart 
@@ -180,19 +201,23 @@ extension GameScene {
 extension GameScene: SKPhysicsContactDelegate {
 	
 	func didBegin(_ contact: SKPhysicsContact) {
-		let bodyA = contact.bodyA.categoryBitMask
-		let bodyB = contact.bodyB.categoryBitMask
+		let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
 		
-		switch bodyA | bodyB {
-			case playerController.bitCategory | baseController.bitCategory:
+		switch collision {
+			case PlayerController.categoryBitMask | BaseController.categoryBitMask:
 				if !isGameOver {
 					gameOver()
 				}
-				break
-			case playerController.bitCategory | pipeController.bitCategory:
+			case PlayerController.categoryBitMask | pipeController.categoryBitMask:
 				if !isGameOver {
 					gameOver()
 				}
+			case PlayerController.categoryBitMask | pipeController.scoreIncrementHitBoxCategoryBitMask:
+				if !pipeController.isScoreIncrHitBoxHitted {
+					pipeController.isScoreIncrHitBoxHitted = true
+					scoreLabelNode.text = "\(playerController.incrementScore())"
+				}
+				
 			default:
 				break
 		}

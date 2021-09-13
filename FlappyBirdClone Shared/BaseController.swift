@@ -13,7 +13,7 @@ class BaseController: SKNode {
 	private let velocity: CGFloat = -60
 	private var baseWidth: CGFloat!
 	private var moveAction: SKAction!
-	private(set) var bitCategory: UInt32!
+	public static let categoryBitMask: UInt32 = 0x1 << 2
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
@@ -27,7 +27,12 @@ class BaseController: SKNode {
 		move()
 		
 		baseWidth = bases[0].size.width
-		bitCategory = bases[0].physicsBody?.categoryBitMask
+		
+		bases.forEach { 
+			$0.physicsBody?.categoryBitMask = BaseController.categoryBitMask
+			$0.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
+		}
+		
 	}
 	
 	public func update() {

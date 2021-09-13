@@ -45,21 +45,23 @@ class PlayerController: SKSpriteNode {
 		return nil
 	}
 	
-	private(set) var bitCategory: UInt32!
+	public static let categoryBitMask: UInt32 = 0x1 << 1
 	private var isGameOver = false
 	
+	private(set) var score = 0
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
 		run(SKAction.repeatForever(SKAction.animate(with: randomBirdTextures!, timePerFrame: 0.15)), withKey: "animation")
 		
-		bitCategory = physicsBody?.categoryBitMask
 		physicsBody?.affectedByGravity = false
 		
 		defaultXPosition = position.x
 		defaultYPosition = position.y
 		
+		physicsBody?.categoryBitMask = PlayerController.categoryBitMask
+		physicsBody?.collisionBitMask = BaseController.categoryBitMask // Collision only with base
 	}
 	
 	let rotateDown = SKAction.rotate(toAngle: CGFloat(GLKMathDegreesToRadians(-90)), duration: 0.4)
@@ -68,15 +70,11 @@ class PlayerController: SKSpriteNode {
 			position.x = defaultXPosition
 		}
 		
+		// if player fall, run rotate (to 270 deg) animation
 		if (physicsBody?.velocity.dy)! < 0 {
-			
 			if action(forKey: "rotateDown") == nil {
 				run(rotateDown, withKey: "rotateDown")
 			}
-			
-			// When the player died, we make it so that you can pass through the pipes
-			physicsBody?.collisionBitMask = isGameOver ? 4 : 0xffffffff
-			
 		}
 		
 	}
@@ -96,6 +94,12 @@ class PlayerController: SKSpriteNode {
 		physicsBody?.velocity = .zero
 		zRotation = 0
 		removeAction(forKey: "rotateDown")
+		score = 0
+	}
+	
+	public func incrementScore() -> Int {
+		score += 1
+		return score
 	}
 	
 	// MARK: - Private functions
