@@ -41,10 +41,12 @@ class PipeController: SKNode {
 			// Lower pipes
 			$0.physicsBody?.categoryBitMask = categoryBitMask
 			$0.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
+			$0.texture?.filteringMode = .nearest
 			
 			// Higher pipes parent from lower pipes
 			($0.children.first as? SKSpriteNode)?.physicsBody?.categoryBitMask = categoryBitMask
 			($0.children.first as? SKSpriteNode)?.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
+			($0.children.first as? SKSpriteNode)?.texture?.filteringMode = .nearest
 		}
 		
 		pipeWidth = pipes[0].size.width

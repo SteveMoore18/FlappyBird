@@ -31,6 +31,7 @@ class BaseController: SKNode {
 		bases.forEach { 
 			$0.physicsBody?.categoryBitMask = BaseController.categoryBitMask
 			$0.physicsBody?.contactTestBitMask = PlayerController.categoryBitMask
+			$0.texture?.filteringMode = .nearest
 		}
 		
 	}

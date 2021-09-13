@@ -53,6 +53,10 @@ class PlayerController: SKSpriteNode {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
+		redBirdTextures.forEach { $0.filteringMode = .nearest }
+		blueBirdTextures.forEach { $0.filteringMode = .nearest }
+		yellowBirdTextures.forEach { $0.filteringMode = .nearest }
+		
 		run(SKAction.repeatForever(SKAction.animate(with: randomBirdTextures!, timePerFrame: 0.15)), withKey: "animation")
 		
 		physicsBody?.affectedByGravity = false

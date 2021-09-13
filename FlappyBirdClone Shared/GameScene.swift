@@ -81,6 +81,12 @@ class GameScene: SKScene {
 		backgroundDay = childNode(withName: "backgroundDay") as? SKSpriteNode
 		backgroundNight = childNode(withName: "backgroundNight") as? SKSpriteNode
 		
+		gameOverNode.texture?.filteringMode = .nearest
+		playButtonNode.texture?.filteringMode = .nearest
+		firstMessageNode.texture?.filteringMode = .nearest
+		backgroundDay.texture?.filteringMode = .nearest
+		backgroundNight.texture?.filteringMode = .nearest
+		
 		rectForEffect = SKSpriteNode(color: .black, size: scene!.size)
 		rectForEffect.position = .zero
 		rectForEffect.zPosition = 10
