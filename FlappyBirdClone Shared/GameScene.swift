@@ -7,6 +7,16 @@
 
 import SpriteKit
 
+#if os(macOS)
+
+typealias UXColor = NSColor
+
+#elseif os(iOS)
+
+typealias UXColor = UIColor
+
+#endif
+
 class GameScene: SKScene {
     
 	private var baseController: BaseController!
@@ -126,7 +136,7 @@ class GameScene: SKScene {
 	}
 	
 	// effect for if the player died or the game restart 
-	private func runScreenEffect(color: NSColor, duration: TimeInterval, complete: (() -> ())?) {
+	private func runScreenEffect(color: UXColor, duration: TimeInterval, complete: (() -> ())?) {
 		let show = SKAction.fadeAlpha(to: 0.8, duration: duration)
 		let hide = SKAction.fadeAlpha(to: 0, duration: duration)
 		rectForEffect.color = color

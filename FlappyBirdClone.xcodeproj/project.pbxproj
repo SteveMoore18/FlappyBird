@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20D456C26EF594C001A07D3 /* 04b19.TTF in Resources */ = {isa = PBXBuildFile; fileRef = E20D456B26EF594C001A07D3 /* 04b19.TTF */; };
+		E20D456D26EF594C001A07D3 /* 04b19.TTF in Resources */ = {isa = PBXBuildFile; fileRef = E20D456B26EF594C001A07D3 /* 04b19.TTF */; };
 		E27F4E6D26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E6C26E8E0A9000D8AA7 /* AppDelegate.swift */; };
 		E27F4E6F26E8E0A9000D8AA7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E6E26E8E0A9000D8AA7 /* GameViewController.swift */; };
 		E27F4E7226E8E0A9000D8AA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27F4E7026E8E0A9000D8AA7 /* Main.storyboard */; };
@@ -29,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E20D456B26EF594C001A07D3 /* 04b19.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04b19.TTF; sourceTree = "<group>"; };
 		E27F4E6226E8E09D000D8AA7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		E27F4E6326E8E09D000D8AA7 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		E27F4E6426E8E0A9000D8AA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E20D456726EF560E001A07D3 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				E20D456B26EF594C001A07D3 /* 04b19.TTF */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		E27F4E5B26E8E09C000D8AA7 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +91,7 @@
 		E27F4E6026E8E09D000D8AA7 /* FlappyBirdClone Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E20D456726EF560E001A07D3 /* Font */,
 				E27F4E6226E8E09D000D8AA7 /* GameScene.sks */,
 				E27F4E9626E8EC17000D8AA7 /* BaseController.swift */,
 				E27F4E9926E904F2000D8AA7 /* PipeController.swift */,
@@ -203,6 +215,7 @@
 			files = (
 				E27F4E8826E8E0A9000D8AA7 /* GameScene.sks in Resources */,
 				E27F4E7226E8E0A9000D8AA7 /* Main.storyboard in Resources */,
+				E20D456C26EF594C001A07D3 /* 04b19.TTF in Resources */,
 				E27F4E7526E8E0A9000D8AA7 /* LaunchScreen.storyboard in Resources */,
 				E27F4E8C26E8E0A9000D8AA7 /* Assets.xcassets in Resources */,
 			);
@@ -213,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27F4E8326E8E0A9000D8AA7 /* Main.storyboard in Resources */,
+				E20D456D26EF594C001A07D3 /* 04b19.TTF in Resources */,
 				E27F4E8926E8E0A9000D8AA7 /* GameScene.sks in Resources */,
 				E27F4E8D26E8E0A9000D8AA7 /* Assets.xcassets in Resources */,
 			);
