@@ -147,7 +147,7 @@ class PlayerController: SKSpriteNode {
 	// MARK: - Private functions
 	private func jump() {
 		physicsBody?.velocity.dy = 0
-		physicsBody?.applyImpulse(CGVector(dx: 0, dy: 20))
+		physicsBody?.applyImpulse(CGVector(dx: 0, dy: 18))
 		removeAction(forKey: "rotateDown")
 		zRotation = CGFloat(GLKMathDegreesToRadians(45))
 		if playSounds {

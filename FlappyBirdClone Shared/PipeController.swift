@@ -76,7 +76,7 @@ class PipeController: SKNode {
 		
 		if !isScoreIncrHitBoxHitted {
 			scoreIncrementHitbox.position.x = pipes[0].position.x + 30
-			scoreIncrementHitbox.position.y = pipes[0].position.y + 269 // move between the pipes
+			scoreIncrementHitbox.position.y = pipes[0].position.y + 259 // move between the pipes
 		}
 		
 	}
@@ -104,7 +104,7 @@ class PipeController: SKNode {
 		pipes[2].position.x = pipes[1].position.x + pipeXDistance + pipeWidth
 		
 		scoreIncrementHitbox.position.x = pipes[0].position.x + 30
-		scoreIncrementHitbox.position.y = pipes[0].position.y + 269 // move between the pipes
+		scoreIncrementHitbox.position.y = pipes[0].position.y + 259 // move between the pipes
 	}
 	
 }
