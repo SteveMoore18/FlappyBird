@@ -38,6 +38,8 @@
 		E27F4E9B26E904F2000D8AA7 /* PipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9926E904F2000D8AA7 /* PipeController.swift */; };
 		E27F4E9D26E94F55000D8AA7 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */; };
 		E27F4E9E26E94F55000D8AA7 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */; };
+		E29FC5D1270F2B01005343A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FC5D0270F2B01005343A3 /* Settings.swift */; };
+		E29FC5D2270F2B01005343A3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29FC5D0270F2B01005343A3 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +67,7 @@
 		E27F4E9626E8EC17000D8AA7 /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
 		E27F4E9926E904F2000D8AA7 /* PipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipeController.swift; sourceTree = "<group>"; };
 		E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		E29FC5D0270F2B01005343A3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +125,7 @@
 				E20D456726EF560E001A07D3 /* Font */,
 				E27F4E6226E8E09D000D8AA7 /* GameScene.sks */,
 				E27F4E9626E8EC17000D8AA7 /* BaseController.swift */,
+				E29FC5D0270F2B01005343A3 /* Settings.swift */,
 				E27F4E9926E904F2000D8AA7 /* PipeController.swift */,
 				E27F4E9C26E94F55000D8AA7 /* PlayerController.swift */,
 				E27F4E6326E8E09D000D8AA7 /* GameScene.swift */,
@@ -281,6 +285,7 @@
 				E27F4E6F26E8E0A9000D8AA7 /* GameViewController.swift in Sources */,
 				E27F4E9D26E94F55000D8AA7 /* PlayerController.swift in Sources */,
 				E27F4E9726E8EC17000D8AA7 /* BaseController.swift in Sources */,
+				E29FC5D1270F2B01005343A3 /* Settings.swift in Sources */,
 				E27F4E6D26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */,
 				E27F4E9A26E904F2000D8AA7 /* PipeController.swift in Sources */,
 			);
@@ -294,6 +299,7 @@
 				E27F4E8026E8E0A9000D8AA7 /* GameViewController.swift in Sources */,
 				E27F4E9E26E94F55000D8AA7 /* PlayerController.swift in Sources */,
 				E27F4E9826E8EC17000D8AA7 /* BaseController.swift in Sources */,
+				E29FC5D2270F2B01005343A3 /* Settings.swift in Sources */,
 				E27F4E7E26E8E0A9000D8AA7 /* AppDelegate.swift in Sources */,
 				E27F4E9B26E904F2000D8AA7 /* PipeController.swift in Sources */,
 			);

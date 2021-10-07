@@ -50,7 +50,6 @@ class PlayerController: SKSpriteNode {
 	
 	private(set) var score = 0
 	
-	private var playSounds = true
 	
 	private var jumpSound: SKAction!
 	private var fallSound: SKAction!
@@ -61,7 +60,7 @@ class PlayerController: SKSpriteNode {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		
-		if playSounds {
+		if Settings.playSounds {
 			jumpSound = SKAction.playSoundFileNamed("sfx_wing.wav", waitForCompletion: false)
 			fallSound = SKAction.playSoundFileNamed("sfx_die.wav", waitForCompletion: false)
 			hitSound = SKAction.playSoundFileNamed("sfx_hit.wav", waitForCompletion: false)
@@ -105,14 +104,14 @@ class PlayerController: SKSpriteNode {
 	public func playSound(effect: DieSountEffect) {
 		switch effect {
 			case .DieAndFall:
-				if playSounds {
+				if Settings.playSounds {
 					run(hitSound) {
 						self.run(self.fallSound)
 					}
 				}
 				
 			case .Die:
-				if playSounds {
+				if Settings.playSounds {
 					run(hitSound)
 				}
 		}
@@ -138,7 +137,7 @@ class PlayerController: SKSpriteNode {
 	
 	public func incrementScore() -> Int {
 		score += 1
-		if playSounds {
+		if Settings.playSounds {
 			run(pointSound)
 		}
 		return score
@@ -150,7 +149,7 @@ class PlayerController: SKSpriteNode {
 		physicsBody?.applyImpulse(CGVector(dx: 0, dy: 18))
 		removeAction(forKey: "rotateDown")
 		zRotation = CGFloat(GLKMathDegreesToRadians(45))
-		if playSounds {
+		if Settings.playSounds {
 			run(jumpSound)
 		}
 	}

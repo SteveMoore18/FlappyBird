@@ -39,8 +39,6 @@ class GameScene: SKScene {
 	
 	private var rectForEffect: SKSpriteNode!
 	
-	private var playSounds = true
-	
 	private var startSound: SKAction!
 	
 	class func newGameScene() -> GameScene {
@@ -96,7 +94,7 @@ class GameScene: SKScene {
 		rectForEffect.zPosition = 10
 		rectForEffect.alpha = 0
 		
-		if playSounds {
+		if Settings.playSounds {
 			startSound = SKAction.playSoundFileNamed("sfx_swooshing.wav", waitForCompletion: false)
 		}
 		
@@ -187,7 +185,7 @@ extension GameScene {
 				}
 				if !isGameStart {
 					start()
-					if playSounds {
+					if Settings.playSounds {
 						run(startSound)
 					}
 				}
@@ -217,7 +215,7 @@ extension GameScene {
 			}
 			if !isGameStart {
 				start()
-				if playSounds {
+				if Settings.playSounds {
 					run(startSound)
 				}
 			}
