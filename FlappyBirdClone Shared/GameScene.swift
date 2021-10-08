@@ -37,6 +37,8 @@ class GameScene: SKScene {
 	
 	private var rainParticles: SKEmitterNode!
 	
+	private var lightNode: SKLightNode!
+	
 	private var isGameOver = false
 	private var isGameStart = false
 	
@@ -88,6 +90,8 @@ class GameScene: SKScene {
 		backgroundRain = childNode(withName: "backgroundRain") as? SKSpriteNode
 		
 		rainParticles = childNode(withName: "rainParticles") as? SKEmitterNode
+		
+		lightNode = playerController.childNode(withName: "light") as? SKLightNode
 		
 		gameOverNode.texture?.filteringMode = .nearest
 		playButtonNode.texture?.filteringMode = .nearest
@@ -176,18 +180,21 @@ class GameScene: SKScene {
 				backgroundNight.zPosition = -1
 				backgroundRain.zPosition = -1
 				rainParticles.zPosition = -2
+				lightNode.isEnabled = false
 				break
 			case 1:
 				backgroundNight.zPosition = 0
 				backgroundDay.zPosition = -1
 				backgroundRain.zPosition = -1
 				rainParticles.zPosition = -2
+				lightNode.isEnabled = false
 				break
 			case 2:
 				backgroundRain.zPosition = 0
 				rainParticles.zPosition = 3
 				backgroundNight.zPosition = -1
 				backgroundDay.zPosition = -1
+				lightNode.isEnabled = true
 				break
 			default:
 				break
