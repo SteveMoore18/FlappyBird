@@ -33,6 +33,9 @@ class GameScene: SKScene {
 	
 	private var backgroundDay: SKSpriteNode!
 	private var backgroundNight: SKSpriteNode!
+	private var backgroundRain: SKSpriteNode!
+	
+	private var rainParticles: SKEmitterNode!
 	
 	private var isGameOver = false
 	private var isGameStart = false
@@ -82,12 +85,16 @@ class GameScene: SKScene {
 		
 		backgroundDay = childNode(withName: "backgroundDay") as? SKSpriteNode
 		backgroundNight = childNode(withName: "backgroundNight") as? SKSpriteNode
+		backgroundRain = childNode(withName: "backgroundRain") as? SKSpriteNode
+		
+		rainParticles = childNode(withName: "rainParticles") as? SKEmitterNode
 		
 		gameOverNode.texture?.filteringMode = .nearest
 		playButtonNode.texture?.filteringMode = .nearest
 		firstMessageNode.texture?.filteringMode = .nearest
 		backgroundDay.texture?.filteringMode = .nearest
 		backgroundNight.texture?.filteringMode = .nearest
+		backgroundRain.texture?.filteringMode = .nearest
 		
 		rectForEffect = SKSpriteNode(color: .black, size: scene!.size)
 		rectForEffect.position = .zero
@@ -161,8 +168,31 @@ class GameScene: SKScene {
 	}
 	
 	private func changeBackground() {
-		let random = Int.random(in: -1...0)
-		backgroundNight.zPosition = CGFloat(random)
+		let random = Int.random(in: 0...2)
+		
+		switch random {
+			case 0:
+				backgroundDay.zPosition = 0
+				backgroundNight.zPosition = -1
+				backgroundRain.zPosition = -1
+				rainParticles.zPosition = -2
+				break
+			case 1:
+				backgroundNight.zPosition = 0
+				backgroundDay.zPosition = -1
+				backgroundRain.zPosition = -1
+				rainParticles.zPosition = -2
+				break
+			case 2:
+				backgroundRain.zPosition = 0
+				rainParticles.zPosition = 3
+				backgroundNight.zPosition = -1
+				backgroundDay.zPosition = -1
+				break
+			default:
+				break
+		}
+		
 	}
 	
 }
